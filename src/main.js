@@ -4,8 +4,8 @@ import routes from './routes.js';
 import store from './store';
 import App from '@views/app.vue';
 
-import 'bootstrap/dist/css/bootstrap.min';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '@/style/common.scss';
 Vue.use(VueRouter);
 
 const router = new VueRouter({

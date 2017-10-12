@@ -1,5 +1,7 @@
 import Todo from '@views/todo.vue';
 import HomePage from '@views/home-page.vue';
+import News from '@views/news.vue';
+import NewsDetail from '@views/news-detail.vue'
 const routes = [
     { path: '/', redirect: '/home-page' },
     {
@@ -10,6 +12,15 @@ const routes = [
         path: '/todo',
         component: Todo,
     },
+    {
+        path: '/news',
+        component: News
+    },
+    {
+        path: '/news-detail/:id',
+        name: 'news-detail',
+        component: NewsDetail
+    }
 ];
 
 export default routes;

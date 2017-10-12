@@ -83,7 +83,8 @@ module.exports = {
             'vue': 'vue/dist/vue.js',
             '@': path.resolve('src'),
             '@components': path.resolve('src/components'),
-            '@views': path.resolve('src/views')
+            '@views': path.resolve('src/views'),
+            '@static': path.resolve('src/static')
         }
     }
 };
