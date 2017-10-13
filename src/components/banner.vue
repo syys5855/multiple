@@ -1,10 +1,10 @@
 <template>
     <div class="sbanner">
         <div class="sbanner-wrap" :style="wrapStyle">
-            <div class="sbanner-wrap-item" :style="calcLeft(index)" v-for="(banner,index) in banners" :key="index">
-                <img :src="banner.img" alt="" />
+            <div class="sbanner-wrap-item" :style="calcLeft(index)" v-for="(banner,index) in banners" :key="banner.id">
+                <img :src="banner.image" @click="$emit('click',{banner})" />
                 <span>
-                    <h3>{{banner.text}}</h3>
+                    <h4 style="line-height:1.2;">{{banner.title}}</h4>
                 </span>
             </div>
         </div>
@@ -15,7 +15,6 @@
 </template>
 
 <script>
-
 
 export default {
     props: ['banners'],
@@ -73,7 +72,7 @@ $indicatorSize:8px;
         &>span {
             position: absolute;
             left: 0;
-            bottom: 25px;
+            bottom: 20px;
             color: #ffffff;
             margin: 0 15px;
         }

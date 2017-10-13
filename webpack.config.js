@@ -1,3 +1,4 @@
+require('http-proxy-middleware');
 var webpack = require('webpack');
 var path = require('path');
 
@@ -17,6 +18,22 @@ module.exports = {
         compress: true,
         port: 3333,
         publicPath: "/dist/",
+        proxy: {
+            '/api': {
+                target: "http://news-at.zhihu.com",
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/api/(.*)': '/api/4/$1'
+                }
+            },
+            '/pic': {
+                target: 'http://pic4.zhimg.com',
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/pic/(.*)': '/$1'
+                }
+            }
+        }
     },
     module: {
         loaders: [{
