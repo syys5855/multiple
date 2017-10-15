@@ -34,7 +34,8 @@ export default {
     overflow: hidden;
     &-img-con {
         &>img {
-            width: 100%;
+            width: 59px;
+            height: 59px;
         }
     }
 }

@@ -5,8 +5,7 @@ export default {
     updateLastNews(state, { data }) {
         state.news = {
             ...state.news,
-            articles: data.stories,
-            banners: data.top_stories
+            ...data
         }
     },
     getNewsDetail(state, { data }) {
@@ -14,5 +13,20 @@ export default {
             ...state.news,
             articleDetail: data
         }
+    },
+    openShare(state, { openShare }) {
+        state.news.openShare = openShare;
+    },
+    hideWelcome(state, { hideWelcome }) {
+        state.news.hideWelcome = hideWelcome;
+    },
+    resetNewsDetail(state) {
+        state.news.articleDetail = {}
+    },
+    updateArticleDate(state, { date }) {
+        state.news.articleDate = date;
+    },
+    updateNewsBefore(state, { data }) {
+        state.news.articles = [...state.news.articles, ...data];
     }
 }

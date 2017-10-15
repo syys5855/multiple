@@ -1,7 +1,8 @@
 import Todo from '@views/todo.vue';
 import HomePage from '@views/home-page.vue';
 import News from '@views/news.vue';
-import NewsDetail from '@views/news-detail.vue'
+import NewsDetail from '@views/news-detail.vue';
+import IScroll from '@views/iscroll.vue';
 const routes = [
     { path: '/', redirect: '/home-page' },
     {
@@ -20,6 +21,10 @@ const routes = [
         path: '/news-detail/:id',
         name: 'news-detail',
         component: NewsDetail
+    },
+    {
+        path: '/iscroll',
+        component: IScroll
     }
 ];
 

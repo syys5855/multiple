@@ -9,7 +9,11 @@
         </div>
         <div class="news-detail-main" v-html="detail.body">
         </div>
-        <bottom-menu :article='detail'></bottom-menu>
+        <bottom-menu :article='detail' @share="openShare({openShare:true})"></bottom-menu>
+        <div v-if="isOpenShare">
+            <share></share>
+            <masker @click="openShare({openShare:false})"></masker>
+        </div>
         <link rel="stylesheet" :href="css" v-for="(css,index) in detail.css" :key="index">
     </div>
 </template>
@@ -17,18 +21,22 @@
 <script>
 import Banner from '@components/banner.vue';
 import BottomMenu from '@components/bottom-menu.vue';
-import { mapState, mapActions, mapGetters } from 'vuex';
+import Masker from '@components/masker.vue';
+import { mapState, mapActions, mapGetters, mapMutations } from 'vuex';
 import _ from 'lodash';
+
+let Share = resolve => require(['@components/share.vue'], resolve);
+
 export default {
     components: {
-        Banner, BottomMenu
+        Banner, BottomMenu, Share, Masker
     },
     computed: {
         ...mapState({
-            detail: state => state.news.articleDetail
+            detail: state => state.news.articleDetail,
+            isOpenShare: state => state.news.openShare
         }),
         topImage() {
-            console.log(this.$store);
             let changeFun = this.$store.getters.imgUrl;
             let image = _.get(this.$store, 'state.news.articleDetail.image', '');
             return image ? changeFun(image) : image;
@@ -39,14 +47,33 @@ export default {
     },
     methods: {
         ...mapActions(
-            ['getNewsDetail']
-        )
+            [
+                'getNewsDetail',
+
+            ]
+        ),
+        ...mapMutations([
+            'openShare',
+            'resetNewsDetail'
+        ])
+
     },
     created() {
         let newsId = this.$route.params.id;
         this.getNewsDetail({ newsId });
         console.log('component--->', this.detail);
+    },
+    destroyed() {
+         this.resetNewsDetail();
+    },
+    watch: {
+        "$route"() {
+            let newsId = this.$route.params.id;
+            this.getNewsDetail({ newsId });
+            this.getNewsDetail({ newsId });
+        }
     }
+    
 }
 </script>
 
@@ -76,9 +103,9 @@ export default {
             position: absolute;
             bottom: 10px;
             right: 10px;
-            color:#ccc;
+            color: #ccc;
         }
-        &>h1{
+        &>h1 {
             position: absolute;
             left: 0px;
             top: 50%;

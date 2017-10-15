@@ -1,7 +1,7 @@
 <template>
     <ul class="list-horizontal">
         <li>
-            <i class="fa fa-chevron-left" @click="$router.go(-1)"></i>
+            <i class="fa fa-chevron-left" @click="$router.push('/news')"></i>
         </li>
         <li>
             <i class="fa fa-chevron-down" @click="getNextArticle"></i>
@@ -10,24 +10,33 @@
             <i class="fa fa-thumbs-up"></i>
         </li>
         <li>
-            <i class="fa fa-share-alt" aria-hidden="true"></i>
+            <i class="fa fa-share-alt" @click="$emit('share')"></i>
         </li>
         <li>
             <i class="fa fa-comment" aria-hidden="true"></i>
         </li>
     </ul>
+         
+
 </template>
 
 <script>
 import _ from 'lodash';
+import { mapActions } from 'vuex';
+
+
 export default {
     props:['article'],
     methods: {
+        ...mapActions([
+            'getNewsDetail'
+        ]),
         getNextArticle() {
             let nextFun = _.get(this.$store, 'getters.nextArticle');
             let nextArticle = nextFun(this.article.id);
-            console.log(nextArticle);
-        }
+            // nextArticle&&this.getNewsDetail({newsId:nextArticle.id});
+            nextArticle && this.$router.push({ name: 'news-detail', params: { id: nextArticle.id } });
+}
     }
 }
 </script>

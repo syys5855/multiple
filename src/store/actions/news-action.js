@@ -1,10 +1,26 @@
 import axios from 'axios';
 import _ from 'lodash';
-import { NEWS_LASEST, IMG_PREFIX, NEWS_DETAIL_ID } from './url-config';
+import { NEWS_LASEST, IMG_PREFIX, NEWS_DETAIL_ID, NEWS_BEFORE } from './url-config';
 
 //  处理图片的路径
 function changeImgSrc(imgs) {
     return imgs.map(img => img.replace(/https?:\/\//g, IMG_PREFIX));
+}
+// 格式化日期 call
+function formateDate(fmt) { //author: meizz
+    var o = {
+        "M+": this.getMonth() + 1, //月份
+        "d+": this.getDate(), //日
+        "h+": this.getHours(), //小时
+        "m+": this.getMinutes(), //分
+        "s+": this.getSeconds(), //秒
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+        "S": this.getMilliseconds() //毫秒
+    };
+    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
 }
 
 export default {
@@ -27,8 +43,9 @@ export default {
                 }
             })
 
-            data = {...data, stories, top_stories }
+            data = {...data, articles: stories, banners: top_stories };
             commit('updateLastNews', { data });
+            setTimeout(() => commit('hideWelcome', { hideWelcome: true }), 2000);
         })
     },
     getNewsDetail({ commit }, { newsId }) {
@@ -39,6 +56,21 @@ export default {
             data = {...data, ... { body: body.replace(/<img(.*)https?:\/\//g, "<img$1" + IMG_PREFIX) } }
             commit('getNewsDetail', { data });
         })
+    },
+    getNewsBefore({ state, commit }, { now }) {
+        let loadedArticles = state.news.articles;
+        let nowDateStr = _.isDate(now) ? formateDate.call(now, 'yyyyMMdd') : now;
+        let newsBeforeUrl = NEWS_BEFORE.replace(':date', nowDateStr);
+        // https://news-at.zhihu.com/api/4/news/before/20131119
+        axios.get(newsBeforeUrl).then(response => {
+            let { stories = [], date } = response.data;
+            stories = stories.map(stroy => _.merge({}, stroy, { images: changeImgSrc(stroy.images || []) }));
+            stories = [...loadedArticles, ...stories];
+            commit('updateNewsBefore', {
+                data: stories
+            });
+            commit('updateArticleDate', { date });
+        });
     }
 
 }

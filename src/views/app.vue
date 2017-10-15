@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <app-nav></app-nav>
+        <!-- <app-nav></app-nav> -->
         <router-view></router-view>
     </div>
 </template>

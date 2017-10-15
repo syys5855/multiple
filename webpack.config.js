@@ -6,7 +6,7 @@ module.exports = {
 
     entry: {
         main: [path.join(__dirname, './src/main.js')],
-        chunk: ['vue', 'bootstrap/dist/css/bootstrap.min.css', 'vue-router', 'vuex', 'lodash']
+        chunk: ['vue', 'bootstrap/dist/css/bootstrap.min.css', 'vue-router', 'vuex', 'lodash', 'iscroll/build/iscroll-probe.js']
     },
     output: {
         path: path.join(__dirname, './dist'),
@@ -101,7 +101,9 @@ module.exports = {
             '@': path.resolve('src'),
             '@components': path.resolve('src/components'),
             '@views': path.resolve('src/views'),
-            '@static': path.resolve('src/static')
+            '@static': path.resolve('src/static'),
+            '@directives': path.resolve('src/directives'),
+            "iscroll": 'iscroll/build/iscroll-probe.js'
         }
     }
 };

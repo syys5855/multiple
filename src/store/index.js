@@ -19,7 +19,11 @@ const store = new Vuex.Store({
             ],
             banners: [{ img: require("@static/imgs/banner-1.jpg"), text: '神特喵知道发生了什么' }, { img: require("@static/imgs/banner-2.jpg"), text: '我也是一脸懵逼啊' }],
             openSlider: false,
+            openShare: false,
+            hideWelcome: false,
             articleDetail: {}, //来自网络接口
+            articleDate: new Date() //默认为今天
+
         }
     },
     mutations,
