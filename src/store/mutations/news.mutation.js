@@ -21,7 +21,8 @@ export default {
         state.news.hideWelcome = hideWelcome;
     },
     resetNewsDetail(state) {
-        state.news.articleDetail = {}
+        state.news.articleDetail = {};
+        state.news.articleDate = new Date();
     },
     updateArticleDate(state, { date }) {
         state.news.articleDate = date;

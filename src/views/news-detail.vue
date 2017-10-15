@@ -70,7 +70,6 @@ export default {
         "$route"() {
             let newsId = this.$route.params.id;
             this.getNewsDetail({ newsId });
-            this.getNewsDetail({ newsId });
         }
     }
     
@@ -83,6 +82,7 @@ export default {
     margin-right: -15px;
     padding-bottom: 50px;
     margin-top: -200px;
+    -webkit-overflow-scrolling : touch;
 }
 
 .news-detail-head {
