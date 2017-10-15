@@ -27,6 +27,6 @@ export default {
         state.news.articleDate = date;
     },
     updateNewsBefore(state, { data }) {
-        state.news.articles = [...state.news.articles, ...data];
+        state.news.articles = data;
     }
 }

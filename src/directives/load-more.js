@@ -5,10 +5,10 @@ const vscroll = {
         el.addEventListener('touchmove', event => {
             event.preventDefault();
         })
-        vscroll.scroller = new IScroll(el, { probeType: 1 });
+        vscroll.scroller = new IScroll(el, { probeType: 1, mouseWheel: true });
         vscroll.scroller.on('scroll', function() {
             let { y, maxScrollY } = this;
-            if (Math.abs(y) - Math.abs(maxScrollY) > 100) {
+            if (!this._loadMore && Math.abs(y) - Math.abs(maxScrollY) > 100) {
                 this._loadMore = true;
                 this.maxScrollY = -Math.abs(this.maxScrollY) - 34;
 

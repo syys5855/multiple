@@ -31,7 +31,7 @@ export default {
     },
     directives: {
         iscroll: {
-            inserted(el,binding,vnode) {
+            inserted(el, binding, vnode) {
                 let items = vnode.context.items;
                 // 阻止touchmove默认事件
                 el.addEventListener('touchmove', event => {
@@ -41,10 +41,9 @@ export default {
                 console.log(scroller);
                 scroller.on('scroll', function() {
                     let { y, maxScrollY } = this;
-                    if (Math.abs(y) - Math.abs(maxScrollY) >= 100) {
+                    if (Math.abs(y) - Math.abs(maxScrollY) >= 100&&loadMore===false) {
                         console.log('load-more', this);
                         loadMore = true;
-                        // this.minScrollY = -34;
                         this._maxScrollY = this.maxScrollY;
                         this.maxScrollY = -(Math.abs(maxScrollY) +34);
                     }
@@ -70,13 +69,13 @@ export default {
                 scroller.refresh();
                 console.log(scroller);
             }
-           
+
         }
     }
 }
 </script>
 
-<style>
+<style scoped>
 .list-wrap {
     position: relative;
     left: 0;
@@ -92,6 +91,7 @@ export default {
     bottom: -34px;
     width: 100%;
 }
+
 
 
 

@@ -14,8 +14,8 @@
                             </router-link>
                         </li>
                     </ul>
-                    <div class="load-more-con">
-                        <button class="btn btn-block" @click="getNewsBefore({now:news.articleDate})">加载更多</button>
+                    <div class="load-more-con text-center">
+                        <i class="fa fa-spinner" aria-hidden="true"></i>
                     </div>
                 </div>
                 <div v-if="news.openSlider">
@@ -114,6 +114,8 @@ export default {
 .load-more-con {
     position: absolute;
     left: 0;
+    height: 34px;
+    line-height: 34px;
     bottom: -34px;
     width: 100%;
 }
