@@ -39,20 +39,7 @@ import { mapState, mapMutations, mapActions } from 'vuex';
 // 异步加载 
 let SliderBar = resolve => require(['@components/slider-bar.vue'], resolve);
 
-function createList(len) {
-    let list = [];
-    while (--len >= 0) {
-        list.push(len);
-    }
-    return list;
-}
-
 export default {
-    data() {
-        return {
-            items: createList(20)
-        }
-    },
     components: { Banner, ArticleSample, SliderBar, Masker, Welcome },
     directives: {
         LoadMore
