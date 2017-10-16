@@ -1,5 +1,5 @@
 <template>
-  <div class="sliderbar">
+  <div class="sliderbar" >
       <div class="sliderbar-group">
           <!-- <div class="col-xs-3">buzhidao</div>
           <div class="col-xs-9">syys</div> -->
@@ -18,12 +18,15 @@
               <div class="font-sm">设置</div>
           </div>
       </div>
+      <div style="height:300px;background-color:red">
+          <div style="height:1000px;background-color:#de1"></div>
+      </div>
   </div>
 </template>
 
 <script>
 export default {
-
+    name:'slider-bar'
 }
 </script>
 
@@ -34,7 +37,8 @@ export default {
         top:0;
         z-index: 10;
         width: 60%;
-        height: 100%;
+        height: 100vh;
+        overflow: auto;
         background: #232a30;
         color:#94999d;
 

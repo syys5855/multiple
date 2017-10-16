@@ -1,10 +1,16 @@
 <template>
-    <div class="mask" @click.stop="$emit('click')">
+    <div class="mask" @click="$emit('click')">
     </div>
 </template>
 
 <script>
 export default {
+    methods: {
+        close() {
+            console.log(123);
+            this.$emit('click')
+        }
+    }
 }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="load-more" v-load-more>
+    <div class="load-more" v-load-more :style="isOverHidden">
         <div>
             <slot class="load-more-main" name="main"></slot>
             <div class="load-more-tips text-center">
@@ -22,6 +22,9 @@
 
 <script>
 import IScroll from 'iscroll';
+function preventDefault(e) {
+    e.preventDefault();
+}
 
 export default {
     data() {
@@ -32,12 +35,17 @@ export default {
     },
     props: [
         'onLoadMore',
-        'loadProp'
+        'loadMoreDisable'
     ],
+    computed: {
+        isOverHidden() {
+            return { overflow: this.loadMoreDisable ? 'hidden' : '' };
+        }
+    },
     directives: {
         'loadMore': {
             bind(el, binding, vnode) {
-                el.addEventListener('touchmove', e => e.preventDefault());
+                el.addEventListener('touchmove', preventDefault);
                 let scroller = new IScroll(el, { probeType: 1, mouseWheel: true, click: true });
                 let context = vnode.context,
                     $data = context.$data;
@@ -56,10 +64,12 @@ export default {
                     }
                 });
                 vnode.scroller = scroller;
+                vnode.el = el;
             },
             componentUpdated(el, binding, vnode, oldVnode) {
                 let $data = vnode.context.$data;
                 vnode.scroller = oldVnode.scroller;
+                vnode.el = oldVnode.el;
                 if ($data.loadStatus !== 0) return;
                 vnode.scroller.refresh();
                 console.log(vnode.scroller);
@@ -69,6 +79,22 @@ export default {
                 vnode.scroller.destroy();
                 vnode.scroller = null;
                 el.removeEventListener('touchmove', e => e.preventDefault);
+            }
+        }
+    },
+    watch: {
+        loadMoreDisable(val) {
+            let scroller = this._self._vnode.scroller,
+                el = this._self._vnode.el;
+                
+            if (val) {
+                el.removeEventListener('touchmove', preventDefault);
+                scroller.scrollTo(0, 0);
+                scroller.disable();
+            }
+            else {
+                el.addEventListener('touchmove', preventDefault);
+                scroller.enabled = true;
             }
         }
     }
