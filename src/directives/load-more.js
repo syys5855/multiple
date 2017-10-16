@@ -11,7 +11,6 @@ const vscroll = {
             if (!this._loadMore && Math.abs(y) - Math.abs(maxScrollY) > 100) {
                 this._loadMore = true;
                 this.maxScrollY = -Math.abs(this.maxScrollY) - 34;
-
             }
         });
         vscroll.scroller.on('scrollEnd', function() {
@@ -30,6 +29,7 @@ const vscroll = {
     },
     componentUpdated() {
         vscroll.scroller.refresh();
+        console.log(123);
     },
     scroller: null,
 }

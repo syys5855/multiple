@@ -1,7 +1,10 @@
 <template>
-    <section>
-        <load-more-com :on-load-more='onLoadMore'>
-            <div slot="main" class="news">
+    <div>
+        <div class="list-wrap" v-load-more>
+            <div class="news">
+                <div class="slider-closed" @click="openSlider({openSlider:true})">
+                    <span class="glyphicon glyphicon-menu-hamburger font-xlg"></span>
+                </div>
                 <div class="news-wrap">
                     <banner style="height:240px;" :banners="news.banners" @click="goToDetail"></banner>
                     <ul class="list-group news-list-group">
@@ -11,21 +14,18 @@
                             </router-link>
                         </li>
                     </ul>
+                    <div class="load-more-con text-center">
+                        <i class="fa fa-spinner" aria-hidden="true"></i>
+                    </div>
                 </div>
-                <!-- 侧边栏 -->
-                <section>
-                    <div class="slider-closed" @click.stop="openSlider({openSlider:true})">
-                        <span class="glyphicon glyphicon-menu-hamburger font-xlg"></span>
-                    </div>
-                    <div v-if="news.openSlider">
-                        <slider-bar></slider-bar>
-                        <masker @click="openSlider({openSlider:false})"></masker>
-                    </div>
-                </section>
+                <div v-if="news.openSlider">
+                    <slider-bar></slider-bar>
+                    <masker @click="openSlider({openSlider:false})"></masker>
+                </div>
             </div>
-        </load-more-com>
-        <welcome v-if="!news.hideWelcome"></welcome>
-    </section>
+        </div>
+        <welcome v-show="!news.hideWelcome"></welcome>
+    </div>
 </template>
 
 <script>
@@ -33,13 +33,14 @@ import Banner from '@components/banner.vue';
 import ArticleSample from '@components/article-sample.vue';
 import Masker from '@components/masker.vue';
 import Welcome from "@components/welcome.vue";
-import LoadMoreCom from '@components/load-more.vue';
 import LoadMore from '@directives/load-more';
 import { mapState, mapMutations, mapActions } from 'vuex';
+
 // 异步加载 
 let SliderBar = resolve => require(['@components/slider-bar.vue'], resolve);
+
 export default {
-    components: { Banner, ArticleSample, SliderBar, Masker, Welcome, LoadMoreCom },
+    components: { Banner, ArticleSample, SliderBar, Masker, Welcome },
     directives: {
         LoadMore
     },
