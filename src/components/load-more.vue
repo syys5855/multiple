@@ -78,7 +78,7 @@ export default {
                 vnode.scroller = oldVnode.scroller;
                 vnode.scroller.destroy();
                 vnode.scroller = null;
-                el.removeEventListener('touchmove', e => e.preventDefault);
+                el.removeEventListener('touchmove', preventDefault);
             }
         }
     },
@@ -86,7 +86,7 @@ export default {
         loadMoreDisable(val) {
             let scroller = this._self._vnode.scroller,
                 el = this._self._vnode.el;
-                
+
             if (val) {
                 el.removeEventListener('touchmove', preventDefault);
                 scroller.scrollTo(0, 0);

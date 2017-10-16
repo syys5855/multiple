@@ -14,7 +14,8 @@
                 </div>
                 <!-- 侧边栏 -->
                 <section>
-                    <div class="slider-closed" v-tap="{methods:openSlider,openSlider:true}">
+                    <!-- <div class="slider-closed" v-tap="{methods:openSlider,openSlider:true}"> -->
+                    <div class="slider-closed" @click="openSlider({openSlider:true})">
                         <span class="glyphicon glyphicon-menu-hamburger font-xlg"></span>
                     </div>
                     <div v-if="news.openSlider">

@@ -1,5 +1,5 @@
 <template>
-    <div class="mask" @click="$emit('click')">
+    <div class="mask" v-tap="{methods:close}">
     </div>
 </template>
 
@@ -7,7 +7,6 @@
 export default {
     methods: {
         close() {
-            console.log(123);
             this.$emit('click')
         }
     }
