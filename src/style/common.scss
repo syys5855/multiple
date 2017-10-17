@@ -18,6 +18,30 @@
     padding: 0px;
 }
 
+.no-margin-hor {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.margin-hor-15 {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.margin-ver-15 {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.no-margin {
+    margin: 0px;
+}
+
+.padding-hor-15 {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
 .font {
     &-xs {
         font-size: 8px;
@@ -46,4 +70,10 @@
     background-color: #000;
     opacity: 0.3;
     z-index: 2;
+}
+
+.list-nostyle {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
 }

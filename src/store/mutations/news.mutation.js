@@ -29,5 +29,9 @@ export default {
     },
     updateNewsBefore(state, { data }) {
         state.news.articles = data;
+    },
+    updateNewsThemes(state, { themes }) {
+        state.news.themes = themes;
+        console.log(state.news.themes);
     }
 }

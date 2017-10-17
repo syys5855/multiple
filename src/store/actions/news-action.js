@@ -1,10 +1,15 @@
 import axios from 'axios';
 import _ from 'lodash';
-import { NEWS_LASEST, IMG_PREFIX, NEWS_DETAIL_ID, NEWS_BEFORE } from './url-config';
+import { NEWS_LASEST, IMG_PREFIX, NEWS_DETAIL_ID, NEWS_BEFORE, NEWS_THEMES } from './url-config';
 
 //  处理图片的路径
 function changeImgSrc(imgs) {
-    return imgs.map(img => img.replace(/https?:\/\//g, IMG_PREFIX));
+    let isArray = _.isArray(imgs),
+        replaceImgs = [];
+    imgs = isArray ? imgs : Array.of(imgs);
+    replaceImgs = imgs.map(img => img.replace(/https?:\/\//g, IMG_PREFIX));
+    return isArray ? replaceImgs : _.head(replaceImgs);
+
 }
 // 格式化日期 call
 function formateDate(fmt) { //author: meizz
@@ -70,6 +75,19 @@ export default {
                 data: stories
             });
             commit('updateArticleDate', { date });
+        });
+    },
+    getThemes({ commit }) {
+        axios.get(NEWS_THEMES).then(response => {
+            let { others = [] } = response.data;
+            let themes = others.map(other => {
+                let thumbnail = changeImgSrc(other.thumbnail);
+                return {
+                    ...other,
+                    thumbnail
+                }
+            });
+            commit('updateNewsThemes', { themes });
         });
     }
 

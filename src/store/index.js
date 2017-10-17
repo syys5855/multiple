@@ -22,7 +22,8 @@ const store = new Vuex.Store({
             openShare: false,
             hideWelcome: false,
             articleDetail: {}, //来自网络接口
-            articleDate: new Date() //默认为今天
+            articleDate: new Date(), //默认为今天
+            themes: [] //侧边栏
 
         }
     },

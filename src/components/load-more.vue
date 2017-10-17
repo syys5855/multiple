@@ -59,7 +59,7 @@ export default {
                 scroller.on('scrollEnd', async function() {
                     if ($data.loadStatus === 1) {
                         $data.loadStatus = 2;
-                        await context.onLoadMore();
+                        await typeof context.onLoadMore==='function'&&context.onLoadMore();
                         $data.loadStatus = 0;
                     }
                 });

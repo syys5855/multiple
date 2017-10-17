@@ -29,7 +29,6 @@ const vscroll = {
     },
     componentUpdated() {
         vscroll.scroller.refresh();
-        console.log(123);
     },
     scroller: null,
 }
