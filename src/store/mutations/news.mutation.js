@@ -63,6 +63,9 @@ export default {
                 .container{
                     background-color:${bgColor};
                 }
+                .only-bottom-border{
+                    border-color:rgba(51, 51, 51, 0.57);
+                }
             `;
         }
     }
