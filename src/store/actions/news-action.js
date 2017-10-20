@@ -1,6 +1,6 @@
 import axios from 'axios';
 import _ from 'lodash';
-import { NEWS_LASEST, IMG_PREFIX, NEWS_DETAIL_ID, NEWS_BEFORE, NEWS_THEMES } from './url-config';
+import { NEWS_LASEST, IMG_PREFIX, NEWS_DETAIL_ID, NEWS_BEFORE, NEWS_THEMES, NEWS_THEME_DETAIL } from './url-config';
 
 //  处理图片的路径
 function changeImgSrc(imgs) {
@@ -58,7 +58,8 @@ export default {
         axios.get(newsDetailUrl).then(response => {
             let data = response.data;
             let body = data.body;
-            data = {...data, ... { body: body.replace(/<img(.*)https?:\/\//g, "<img$1" + IMG_PREFIX) } }
+
+            data = {...data, ... { body: body.replace(/https?:\/\/(.+?)\.(jpg|png|gif)/ig, IMG_PREFIX + "$1.$2") } }
             commit('getNewsDetail', { data });
         })
     },
@@ -88,6 +89,33 @@ export default {
                 }
             });
             commit('updateNewsThemes', { themes });
+        });
+    },
+    getThemeDetail({ commit }, { id }) {
+        let themeDetailUrl = NEWS_THEME_DETAIL.replace(':id', id);
+        axios.get(themeDetailUrl).then(response => {
+            let { image, stories, background, editors } = response.data,
+                detail = {};
+
+            image = changeImgSrc(image);
+            stories = _.unionBy([..._.filter(stories, story => story.hasOwnProperty('images')).map(story =>
+                _.assign({}, story, {
+                    images: changeImgSrc(story.images)
+                })
+            ), ...stories], 'id');
+            editors = editors.map(editor =>
+                _.assign({}, editor, {
+                    avatar: changeImgSrc(editor.avatar)
+                })
+            );
+            background = changeImgSrc(background);
+            detail = _.assign({}, response.data, {
+                background,
+                stories,
+                image,
+                editors
+            });
+            commit('updateThemeDetail', { detail });
         });
     }
 

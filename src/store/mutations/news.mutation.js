@@ -24,6 +24,9 @@ export default {
         state.news.articleDetail = {};
         state.news.articleDate = new Date();
     },
+    resetNewsPageState(state) {
+        state.news.openSlider = false;
+    },
     updateArticleDate(state, { date }) {
         state.news.articleDate = date;
     },
@@ -32,6 +35,8 @@ export default {
     },
     updateNewsThemes(state, { themes }) {
         state.news.themes = themes;
-        console.log(state.news.themes);
+    },
+    updateThemeDetail(state, { detail }) {
+        state.news.themeDetal = detail;
     }
 }

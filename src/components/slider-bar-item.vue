@@ -1,5 +1,5 @@
 <template>
-    <div class="row slider-bar-item">
+    <div class="row slider-bar-item" v-tap="{methods:emitTap}">
         <div class="pull-left">
             <span>{{barItemText}}</span>
         </div>
@@ -13,7 +13,12 @@
 export default {
     props: [
         'barItemText'
-    ]
+    ],
+    methods:{
+        emitTap(){
+            this.$emit('tap');
+        }
+    }
 }
 </script>
 

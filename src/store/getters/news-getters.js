@@ -6,5 +6,5 @@ export default {
         let articles = _.get(state, 'news.articles', []);
         let curIndex = _.findIndex(articles, article => article.id === articleId);
         return curIndex < articles.length ? articles[curIndex + 1] : null;
-    }
+    },
 }

@@ -33,6 +33,13 @@ module.exports = {
                 pathRewrite: {
                     '^/pic/(.*)': '/$1'
                 }
+            },
+            '*.jpg': {
+                target: 'http://pic4.zhimg.com',
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/pic/(.*)': '/$1'
+                }
             }
         }
     },
