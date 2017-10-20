@@ -1,5 +1,5 @@
 <template>
-    <section :style="{'background-color':news.appInfo.bgColor}">
+    <section>
         <load-more-com style="height:100vh;" :on-load-more='onLoadMore' :load-more-disable='news.openSlider'>
             <div slot="main" class="news">
                 <div class="news-wrap">
