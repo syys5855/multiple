@@ -32,8 +32,11 @@
                 </ul>
             </load-more>
             <div class="clearfix sliderbar-bottom-menu">
-                <span class="pull-right" @click="updateAppStyle({bgColor:'#232a30'})">
+                <span class="pull-right" @click="updateAppStyle({bgColor:'#232a30'})" v-if="appInfo.bgColor==='#fff'">
                     <i class="fa fa-moon-o font-lg"></i>&nbsp;夜间
+                </span>
+                <span class="pull-right" @click="updateAppStyle({bgColor:'#fff'})" v-else>
+                    <i class="fa fa-sun-o font-lg"></i>&nbsp;日间
                 </span>
             </div>
         </div>
@@ -48,7 +51,8 @@ export default {
   components: { SliderBarItem, LoadMore },
   computed: {
     ...mapState({
-      themes: state => state.news.themes
+      themes: state => state.news.themes,
+      appInfo: state=>state.news.appInfo
     })
   },
   methods: {

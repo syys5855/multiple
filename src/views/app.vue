@@ -26,10 +26,10 @@ export default {
       }
       function createStyle() {
         return `
-                .list-group-item,.news-detail-main *,.bottom-menu,.share{
+                .list-group-item,.news-detail-main *,.bottom-menu{
                     background-color:${bgColor}!important;
                 }
-                .load-more-tips,.list-group-item,.top-menu-wraper,.news-detail *,.bottom-menu{
+                .load-more-tips,.list-group-item,.top-menu-wraper,.news-detail-main *,.bottom-menu{
                     color:${bgColor === "#232a30"
                     ? "#94999d"
                     : "#333"}!important;
