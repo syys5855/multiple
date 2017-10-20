@@ -38,5 +38,27 @@ export default {
     },
     updateThemeDetail(state, { detail }) {
         state.news.themeDetal = detail;
+    },
+    updateAppStyle(state, { bgColor }) {
+        state.news.appInfo.bgColor = bgColor;
+
+
+        let appStyle = document.querySelector("#appStyle");
+        if (appStyle) {
+            document.head.removeChild(appStyle);
+        }
+        appStyle = document.createElement('style');
+        appStyle.setAttribute('type', 'text/css');
+        appStyle.setAttribute('id', 'appStyle')
+        appStyle.innerHTML = `
+            .list-group-item{
+                background-color:${bgColor};
+                color:#ccc;
+            }
+            .container{
+                background-color:${bgColor};
+            }
+        `;
+        document.head.appendChild(appStyle);
     }
 }

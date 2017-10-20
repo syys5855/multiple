@@ -1,10 +1,10 @@
 <template>
-    <section>
+    <section :style="{'background-color':news.appInfo.bgColor}">
         <load-more-com style="height:100vh;" :on-load-more='onLoadMore' :load-more-disable='news.openSlider'>
             <div slot="main" class="news">
                 <div class="news-wrap">
                     <banner style="height:240px;" :banners="news.banners" @click="goToDetail"></banner>
-                    <ul class="list-group news-list-group">
+                    <ul class="list-group news-list-group" >
                         <li class="list-group-item only-bottom-border" v-for='(article,index) in news.articles' :key="index">
                             <article-sample :article='article' @tap="$router.push({name:'news-detail',params:{id:article.id}})"></article-sample>
                         </li>

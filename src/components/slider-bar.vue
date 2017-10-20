@@ -24,13 +24,18 @@
                     <div class="font-sm">设置</div>
                 </div>
             </div>
-            <load-more style="height:500px;overflow:hidden;">
+            <load-more style="height:74vh;overflow:hidden;">
                 <ul class="list-nostyle" slot="main">
                     <li v-for="theme in themes" :key='theme.id'>
                         <slider-bar-item :bar-item-text='theme.name' :title='theme.description' @tap="$router.push({name:'theme-detail',params:{id:theme.id}})"></slider-bar-item>
                     </li>
                 </ul>
             </load-more>
+            <div class="clearfix sliderbar-bottom-menu">
+                <span class="pull-right" @click="updateAppStyle({bgColor:'#232a30'})">
+                    <i class="fa fa-moon-o font-lg"></i>&nbsp;夜间
+                </span>
+            </div>
         </div>
     </div>
 </template>
@@ -38,7 +43,7 @@
 <script>
 import SliderBarItem from "@components/slider-bar-item.vue";
 import LoadMore from "@components/load-more.vue";
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState,mapMutations } from "vuex";
 export default {
   components: { SliderBarItem, LoadMore },
   computed: {
@@ -47,7 +52,8 @@ export default {
     })
   },
   methods: {
-    ...mapActions(["getThemes"])
+    ...mapActions(["getThemes"]),
+    ...mapMutations(['updateAppStyle'])
   },
   created() {
     this.getThemes();
@@ -56,6 +62,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$menuHeight:40px;
 .sliderbar {
   position: fixed;
   left: 0;
@@ -66,5 +73,14 @@ export default {
   overflow: auto;
   background: #232a30;
   color: #94999d;
+}
+.sliderbar-bottom-menu{
+    position: absolute;
+    bottom: 0px;
+    right: 15px;
+    width: 100%;
+    height: $menuHeight;
+    line-height: $menuHeight;
+    background-color: #232a30;
 }
 </style>
