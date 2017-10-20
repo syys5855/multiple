@@ -41,32 +41,5 @@ export default {
     },
     updateAppStyle(state, { bgColor }) {
         state.news.appInfo.bgColor = bgColor;
-
-        let appStyle = document.querySelector("#appStyle");
-        if (appStyle) {
-            appStyle.innerHTML = createStyle();
-
-        } else {
-            appStyle = document.createElement('style');
-            appStyle.setAttribute('type', 'text/css');
-            appStyle.setAttribute('id', 'appStyle')
-            appStyle.innerHTML = createStyle();
-            document.head.appendChild(appStyle);
-        }
-
-        function createStyle() {
-            return `
-                .list-group-item{
-                    background-color:${bgColor};
-                    color:#ccc;
-                }
-                .container{
-                    background-color:${bgColor};
-                }
-                .only-bottom-border{
-                    border-color:rgba(51, 51, 51, 0.57);
-                }
-            `;
-        }
     }
 }

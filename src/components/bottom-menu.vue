@@ -1,5 +1,5 @@
 <template>
-    <ul class="list-horizontal">
+    <ul class="list-horizontal bottom-menu">
         <li>
             <i class="fa fa-chevron-left" @click="$router.go(-1)"></i>
         </li>

@@ -17,7 +17,7 @@ module.exports = {
         contentBase: path.join(__dirname),
         compress: true,
         port: 3333,
-        host: '192.168.1.62',
+        // host: '192.168.1.62',
         publicPath: "/dist/",
         proxy: {
             '/api': {
